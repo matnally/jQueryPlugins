@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+
+        <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame Remove this if you use the .htaccess -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+        <title>HTML5 HTML using jQuery functionality</title>
+        <meta name="description" content="HTML5 page to show jQuery functionality">
+        <meta name="author" content="Intranet Team">
+
+        <meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+        <link rel="stylesheet" href="_css/template.css" />
+
+        <!-- jQuery core include -->
+        <!-- <script type="text/javascript" src="_jquery/jquery-1.11.3.min.js"></script> -->
+        <script type="text/javascript" src="_jquery/jquery-2.1.4.min.js"></script><!-- Does not support IE 6,7 or 8 -->
+        <!-- jQuery UI include -->
+        <link rel="stylesheet" href="_jquery/jquery-ui/jquery-ui.min.css" />
+        <script type="text/javascript" src="_jquery/jquery-ui/jquery-ui.min.js"></script>
+        <!-- START jQuery plugins -->
+
+            <!-- START Favico -->
+            <link rel="shortcut icon" href="favicon32.ico">
+            <link rel="apple-touch-icon" href="apple-touch-icon.png">
+            <script type="text/javascript" src="_jquery/favico/favico.min.js"></script>
+            <script>
+            var favicon=new Favico({
+                animation:'popFade'
+            });
+            favicon.badge("69");
+            </script>
+            <!-- END Favico -->
+
+            <!-- START Form Validation -->
+            <link rel="stylesheet" href="_jquery/form-validator/theme-default.min.css" />
+            <script src="_jquery/form-validator/jquery.form-validator.min.js"></script>
+            <script>
+            $("#frmTestValidation").ready(function() { //When form is rendered and ready
+                $.validate({
+                    form : "#frmTestValidation"
+                    ,modules : "date, file, location, security, html5"
+                    ,onModulesLoaded : function() {
+                      $("#country").suggestCountry();
+                    }
+                    ,validateOnBlur : true
+                    ,showHelpOnFocus : true
+                    ,addSuggestions : true
+                    ,onError : function() {
+                        alert("Validation failed");
+                    }
+                    ,onSuccess : function() {
+                        alert("The form is valid!");
+                        return false; // Will stop the submission of the form
+                    }
+                });
+                $("#presentation").restrictLength($("#pres-max-length")); // Restrict presentation length
+            });
+            </script>
+            <!-- END Form Validation -->
+
+            <!-- START Capty -->
+            <link rel="stylesheet" href="_jquery/capty/css/jquery.capty.css" />
+            <script src="_jquery/capty/js/jquery.capty.min.js"></script>
+            <script>
+            $(function() {
+                $(".capty").capty({
+                    animation: "fade"
+                    ,speed: 400
+                });
+            });
+            </script>
+            <!-- END Capty -->
+
+           <!-- START Notify -->
+            <link rel="stylesheet" href="_jquery/notify/css/notify.css" />
+            <script src="_jquery/notify/js/jquery.notify.min.js"></script>
+            <script>
+            function create( template, vars, opts ) {
+                return $container.notify("create", template, vars, opts);
+            }
+
+            $(function() {
+                $container = $("#notify_container").notify();
+                $("#sticky_cookie").ready(function() {
+                    // Cookie should only appear once
+
+                    //For testing purposes only
+                    //$.removeCookie("cookieNotify");
+
+                    var alreadyNotifyCookie = $.cookie("cookieNotify");
+                    if (alreadyNotifyCookie == "yes") {
+                        //Cookie disclaimer already shown
+                    } else {
+                        //Create session cookie
+                        $.cookie("cookieNotify","yes");
+                        //Show disclaimer
+                        create("sticky"
+                        ,{
+                            title:'Cookie Notice'
+                            ,text:'To give you the best experience on this website, information in cookies are stored on your computer.'
+                        }
+                        ,{
+                            expires:false
+                        });
+                    } //if (alreadyNotifyCookie == "yes") {
+                });
+
+                $(".sticky").click(function() {
+                    create("sticky"
+                    ,{
+                        title:'Sticky Notification'
+                        ,text:'Example of a "sticky" notification. <a href="http://www.google.com">Google</a>'
+                    }
+                    ,{
+                        expires:5000
+                    });
+                });
+
+            });
+            </script>
+            <!-- END NOTIFY -->
+
+      			<!-- START COOKIE -->
+      			<script type="text/javascript" src="_jquery/cookie/js/jquery.cookie.js"></script>
+      			<script type="text/javascript">
+      			$(function() {
+      				$.cookie("domainCookie","This is a cookie for the domain!",{ expires: 7 },{ path: '/' }); //Cookie expires in 7 days and available for all paths of domain
+      				//alert( $.cookie("domainCookie") );
+      				$.cookie("domainCookie", null); //Deletes the cookie by setting the value to null
+      				$.removeCookie("domainCookie", { path: '/' });
+      			});
+      			</script>
+      			<!-- END COOKIE -->
+
+            <!-- START INTROLOADER -->
+            <link rel="stylesheet" href="_jquery/jpreloader/css/jpreloader.css" />
+            <script src="_jquery/jpreloader/js/jpreloader.min.js"></script>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('body').jpreLoader(); // To run when BODY has loaded / is ready
+                });
+            </script>
+            <!-- END INTROLOADER -->
+
+            <!-- START MYQRCODE -->
+            <script src="_jquery/myQRcode/js/jquery.MyQRCode.js"></script>
+            <script type="text/javascript">
+            $(function(){
+              $("#qrcode").MyQRCode({
+                encoding:"UTF-8"
+                ,content: "Text you want to transfer to your mobile device"
+                ,size:"150x150"
+              });
+            });
+            </script>
+            <!-- END MYQRCODE -->
+
+            <!-- START ZRSSFEED -->
+            <link rel="stylesheet" href="_jquery/zRSSfeed/css/jquery.zrssfeed.css" />
+            <script src="_jquery/zRSSfeed/js/jquery.zrssfeed.min.js"></script>
+            <script type="text/javascript">
+            $(document).ready(function () {
+            	$('#zRSSfeed').rssfeed('http://feeds.reuters.com/reuters/oddlyEnoughNews'
+              ,{
+                limit: 5
+              });
+            });
+            </script>
+            <!-- END ZRSSFEED -->
+
+            <!-- START TOOLTIP -->
+            <link rel="stylesheet" href="_jquery/tooltip/css/tooltip.css" />
+            <script src="_jquery/tooltip/js/tooltip.js"></script>
+            <!-- END TOOLTIP -->
+
+
+
+        <!-- END jQuery plugins -->
+
+    </head>
+    <body>
+
+        <a href="#mainContent" title="Skip to main content">Skip to main content</a>
+
+        <header>
+            <h1>HTML5 page to show jQuery functionality</h1>
+        </header>
+
+        <nav>
+        </nav>
+
+        <section id="mainContent">
+            <h2>jQuery plugins used</h2>
+            <ul>
+                <li>Favico - <a href="http://lab.ejci.net/favico.js" title="favico on GitHub">favico on GitHub</a></li>
+                <li>Form Validation - <a href="http://formvalidator.net" title="formvalidator.net">formvalidator.net</a>
+                    <div class="standOutDiv">
+                        <form action="javascript:void(0);" id="frmTestValidation">
+                            <p>E-mail<input name="email" data-validation="email"></p>
+                            <p>User name<input name="user" data-validation="length alphanumeric" data-validation-length="3-12" data-validation-error-msg="User name has to be an alphanumeric value (3-12 chars)"></p>
+                            <p>Password<input name="pass_confirmation" data-validation="strength" data-validation-strength="2"></p>
+                            <p>Repeat password<input name="pass" data-validation="confirmation"></p>
+                            <p>Birth date<input name="birth" data-validation="birthdate" data-validation-help="yyyy-mm-dd"></p>
+                            <p>Country<input name="country" id="country" data-validation="country"></p>
+                            <p>Profile image
+                                <input name="image" data-validation="mime size required"
+                                                    data-validation-allowing="jpg, png"
+                                                    data-validation-max-size="300kb"
+                                                    data-validation-error-msg-required="No image selected" type="file">
+                            </p>
+                            <p>User Presentation (<span id="pres-max-length">100</span> characters left)<br><textarea name="presentation" id="presentation"></textarea></p>
+                            <p>
+                                <input  data-validation="required"
+                                        data-validation-error-msg="You have to agree to our terms" type="checkbox">
+                                I agree to the <a href="" target="_blank">terms of service</a>
+                            </p>
+                            <input value="Validate" type="submit">
+                            <input value="Reset form" type="reset">
+                        </form>
+                    </div>
+                    <br>
+                </li><!-- Form Validation -->
+                <li>Capty - <a href="https://github.com/wbotelhos/capty" title="https://github.com/wbotelhos/capty">Capty on GitHub</a>
+                    <br><br>
+                    <div class="standOutDiv">
+                        <img class="capty" src="_jquery/capty/img/image.jpg" alt="This is a test of Capty using the image's alt text" />
+                    </div>
+                    <br>
+                </li><!-- Capty -->
+                <li>Notify Notifications - <a href="http://www.erichynds.com/examples/jquery-notify/" title="Notify Notifications">erichynds.com/examples/jquery-notify/</a>
+                  <br><br>
+                  <div class="standOutDiv">
+                    <!-- *** START NOTIFY NOTIFICATIONS HTML *** -->
+                    <div id="notify_container" style="display:none">
+                        <div id="sticky">
+                            <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+                            <h2>#{title}</h2>
+                            <p class="info">#{text}</p>
+                        </div>
+                        <div id="sticky_cookie">
+                            <a class="ui-notify-close ui-notify-cross" href="#">x</a>
+                            <h2>#{title}</h2>
+                            <p class="info">#{text}</p>
+                        </div>
+                    </div>
+                    <!-- *** END NOTIFY NOTIFICATIONS HTML *** -->
+                    <a href="javascript:void(0);" class="sticky">Create a Notify notification</a>
+                  </div><!-- Notify -->
+                  <br>
+                </li>
+                <li>Cookie creation- <a href="https://github.com/carhartl/jquery-cookie" title="Cookie creation">https://github.com/carhartl/jquery-cookie</a>
+                  <div class="standOutDiv">
+                    <p>You should have seen the pop up when you opened the page for the first time. Clear cookies then refresh.
+                  </div>
+                <li>MyQRcode - <a href="http://www.kfsoft.info/MyQRCode/" title="http://www.kfsoft.info/MyQRCode/">kfsoft.info/MyQRCode/</a>
+                    <br><br>
+                    <div class="standOutDiv">
+                        <div id="qrcode"></div>
+                    </div>
+                    <br>
+                </li><!-- MyQRcode -->
+                <li>zRSSfeed - <a href="http://www.zazar.net/developers/jquery/zrssfeed/" title="http://www.zazar.net/developers/jquery/zrssfeed/">zazar.net/developers/jquery/zrssfeed/</a>
+                    <br><br>
+                    <div class="standOutDiv">
+                        <div id="zRSSfeed"></div>
+                    </div>
+                    <br>
+                </li><!-- zRSSfeed -->
+
+                <li>Tooltip - <a href="http://jsbin.com/cijaj/2/edit?html,css,js,console,output" title="http://jsbin.com/cijaj/2/edit?html,css,js,console,output">jsbin.com/cijaj/2/edit?html,css,js,console,output</a>
+                    <br>
+                    <div class="standOutDiv">
+                        <p title="Mouse over the heading above to view the tooltip." class="masterTooltip">Mouse over the heading text above to view it's tooltip.</p>
+                        <button type="button" class="masterTooltip" title="<img class=‘capty' src='_jquery/capty/img/image.jpg' alt='This is a test of Capty using the images alt text' /><br>Click this button to submit">Submit</button>
+                        <br>
+                        <input type="text" placeholder="Your Name" class="masterTooltip" title="<img class=‘capty' src='_jquery/capty/img/image.jpg' alt='This is a test of Capty using the images alt text' /><br>Enter your Name" />
+                        <br>
+                        <p style="text-align:right" title="Mouse over the heading above to view the tooltip." class="masterTooltip">Mouse over the heading text above to view it's tooltip.</p>
+                        <p style="text-align:right" title="<img class=‘capty' src='_jquery/capty/img/image.jpg' alt='This is a test of Capty using the images alt text' /><br>Mouse over the heading above to view the tooltip." class="masterTooltip">Mouse over the heading text above to view it's tooltip. Mouse over the heading text above to view it's tooltip.</p>
+                    </div>
+                    <br>
+                </li><!-- tooltip -->
+
+
+
+
+
+
+
+            </ul>
+        </section>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+        <footer>
+        </footer>
+
+    </body>
+</html>

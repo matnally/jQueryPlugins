@@ -1,0 +1,21 @@
+
+.capty-caption {
+	background-color: #000;
+	color: #FFF;
+	font: bold 11px verdana;
+	padding-left: 10px;
+	padding-top: 7px;
+	text-shadow: 1px 1px 0 #222;
+}
+
+.capty-caption a {
+	color: #318DAD;
+	font: bold 11px verdana;
+	text-decoration: none;
+	text-shadow: none;
+}
+
+img.capty { /* IMPORTANT AS NEEDS WIDTH AND HEIGHT OR ELSE NOT DISPLAY */
+	width: 300px;
+	height: 200px;
+}
