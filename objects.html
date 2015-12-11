@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Objects</title>
+</head>
+<body>
+
+    <script>
+        
+        var objPerson = new Object(); //Main object creation
+
+            objPerson = { //Assign functions to object
+                setValues: function (strTitle, strFirstname, strSecondname, strDOB, strGender) {
+                    //Set Property values
+
+                    this.title = strTitle;
+                    this.firstname = strFirstname;
+                    this.secondname = strSecondname;
+                    this.fullname = (this.title + " " + this.firstname + " " + this.secondname);
+
+                    this.DOB = strDOB; //YYYY-MM-DD
+                    this.age = this.getAgeFromDOB(strDOB);
+
+                    this.gender = strGender;
+
+                }
+                ,getAgeFromDOB: function (strDOB) {
+                    //Return age determined from date of birth
+
+                    var datDOB = new Date(strDOB); //YYYY-MM-DD
+                    return ~~((Date.now() - datDOB) / (31557600000));
+                }
+                ,displayProperties: function () {
+                    //Displays all Object Properties
+
+                    for (var key in this) { 
+                        if (this.hasOwnProperty(key)) {
+                            document.write("PropertyName : " + key + " : PropertyValue : " + this[key]);
+                            document.write("<br>");
+                        }
+                    }
+
+                    document.write("<br>");
+
+                }
+            };
+
+        var objAlly = Object.create(objPerson);//Create new object using objPerson definition
+        var objEnemy = Object.create(objPerson);//Create new object using objPerson definition
+
+        objAlly.setValues(null, null, null, null, null); //Init
+        objEnemy.setValues(null, null, null, null, null); //Init
+        document.write("<h1>init</h1>");
+        objAlly.displayProperties();
+        objEnemy.displayProperties();
+
+        objAlly.setValues("Mr", "Nice", "Bloke", "1979-01-13", "Male"); //DOB = YYYY-MM-DD
+        objEnemy.setValues("Ms", "Evil", "Byatch", "1992-01-13", "Female"); //DOB = YYYY-MM-DD
+        document.write("<h1>setDefaults</h1>");
+        objAlly.displayProperties();
+        objEnemy.displayProperties();
+
+    </script>
+</body>
+</html>
